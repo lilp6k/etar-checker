@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>E-TAR CHECKER</title>
+    <link rel="stylesheet" href="popup.css">
+  </head>
+  <body>
+    <main class="toon-panel">
+      <header class="hero">
+        <div class="title-copy">
+          <p class="kicker">Job Corps E-TAR</p>
+          <h1><span data-text="E-TAR">E-TAR</span><span data-text="CHECKER">CHECKER</span></h1>
+        </div>
+
+        <img class="mascot" src="assets/checkbox.png" alt="Silly blue checkbox mascot">
+      </header>
+
+      <section class="status-card" aria-label="Current status">
+        <span>Status</span>
+        <p id="status" role="status">Ready on the active tab.</p>
+      </section>
+
+      <section class="actions" aria-label="Checkbox actions">
+        <button id="checkAll" type="button" class="primary">CHECK ALL</button>
+        <button id="scanPage" type="button" class="secondary">SCAN PAGE</button>
+      </section>
+
+      <dl class="stats" aria-label="Last run summary">
+        <div>
+          <dt>Checked</dt>
+          <dd id="checkedCount" data-value="0" data-digits="1">0</dd>
+        </div>
+        <div>
+          <dt>Already</dt>
+          <dd id="alreadyCount" data-value="0" data-digits="1">0</dd>
+        </div>
+        <div>
+          <dt>Skipped</dt>
+          <dd id="skippedCount" data-value="0" data-digits="1">0</dd>
+        </div>
+      </dl>
+    </main>
+
+    <script src="shared.js"></script>
+    <script src="popup.js"></script>
+  </body>
+</html>

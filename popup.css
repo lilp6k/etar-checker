@@ -1,0 +1,323 @@
+@font-face {
+  font-family: "ETar Toony";
+  src: url("assets/fonts/toony.ttf") format("truetype");
+  font-display: swap;
+}
+
+/* Shared palette and spacing. Keep this small so the style stays deliberate. */
+:root {
+  color-scheme: light;
+  --toon-font: "ETar Toony", "Arial Rounded MT Bold", "Arial Black", system-ui, sans-serif;
+  --paper: #fff7ed;
+  --red: #f04337;
+  --red-dark: #b82122;
+  --red-soft: #ff6a5e;
+  --blue: #2167d5;
+  --blue-dark: #143f96;
+  --blue-soft: #69a3ff;
+  --paper-dot: rgba(11, 11, 11, 0.075);
+  --ink: #0b0b0b;
+  --white: #fffaf2;
+  --line: 3px;
+  --lift: 4px 5px 0 var(--ink);
+  --press: 2px 3px 0 var(--ink);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* The browser popup is rectangular, so the design keeps the surface simple. */
+body {
+  width: 374px;
+  margin: 0;
+  padding: 0;
+  background:
+    radial-gradient(circle at 18px 18px, var(--paper-dot) 0 2px, transparent 2px 18px),
+    var(--paper);
+  color: var(--ink);
+  font: 14px/1.25 var(--toon-font);
+  font-weight: 400;
+}
+
+.toon-panel {
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+}
+
+/* Header: title text on the left, mascot on the right. */
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 148px;
+  align-items: center;
+  gap: 2px;
+}
+
+.kicker {
+  margin: 0 0 4px;
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 400;
+  text-shadow:
+    -1px -1px 0 var(--white),
+    1px 1px 0 var(--white);
+  -webkit-text-stroke: 0.35px var(--ink);
+}
+
+/* The title uses a duplicate black layer for a clean angled cartoon edge. */
+h1 {
+  isolation: isolate;
+  display: grid;
+  gap: 2px;
+  margin: 0;
+  font-family: var(--toon-font);
+  font-size: 34px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 0.96;
+}
+
+h1 span {
+  position: relative;
+  isolation: isolate;
+  display: block;
+  width: max-content;
+  color: var(--blue);
+  -webkit-text-fill-color: var(--blue);
+  -webkit-text-stroke: 1.45px var(--ink);
+  text-shadow: 1px 1px 0 var(--white);
+  transform: rotate(-1deg);
+}
+
+h1 span:last-child {
+  color: var(--red);
+  -webkit-text-fill-color: var(--red);
+  transform: rotate(1deg) translateX(1px);
+}
+
+h1 span::before {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  transform: translate(3px, 4px);
+  color: var(--ink);
+  -webkit-text-fill-color: var(--ink);
+  -webkit-text-stroke: 2.25px var(--ink);
+  text-shadow: none;
+}
+
+h1 span::after {
+  content: none;
+}
+
+.mascot {
+  display: block;
+  justify-self: end;
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+  transform: translate(4px, -2px) rotate(2deg);
+  filter: drop-shadow(3px 4px 0 rgba(11, 11, 11, 0.35));
+  transform-origin: 55% 58%;
+  animation: mascot-idle 2.6s ease-in-out infinite;
+}
+
+/* Panels use the same outline language as the mascot. */
+.status-card,
+.stats {
+  border: var(--line) solid var(--ink);
+  border-radius: 18px;
+  background: var(--white);
+  box-shadow: var(--lift);
+}
+
+.status-card {
+  display: grid;
+  gap: 5px;
+  min-height: 74px;
+  padding: 11px 13px;
+}
+
+.status-card span {
+  color: var(--blue);
+  font-size: 14px;
+  font-weight: 400;
+  text-shadow:
+    -1px -1px 0 var(--white),
+    1px 1px 0 var(--white);
+  -webkit-text-stroke: 0.55px var(--ink);
+}
+
+#status {
+  margin: 0;
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 400;
+  text-shadow:
+    -1px -1px 0 var(--white),
+    1px 1px 0 var(--white),
+    2px 2px 0 rgba(11, 11, 11, 0.12);
+  -webkit-text-stroke: 0.32px var(--ink);
+}
+
+/* Buttons get depth from the button body. The labels stay clean. */
+.actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+button {
+  min-height: 50px;
+  border: var(--line) solid var(--ink);
+  border-radius: 16px;
+  cursor: pointer;
+  font: inherit;
+  font-family: var(--toon-font);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1;
+  padding: 10px 10px 8px;
+  text-align: center;
+  box-shadow: var(--lift);
+  letter-spacing: 0;
+  color: var(--white);
+  -webkit-text-fill-color: var(--white);
+  text-shadow: none;
+  -webkit-text-stroke: 1.05px var(--ink);
+}
+
+button.primary {
+  background: linear-gradient(180deg, var(--blue-soft) 0 18%, var(--blue) 19% 68%, var(--blue-dark) 100%);
+}
+
+button.secondary {
+  background: linear-gradient(180deg, var(--red-soft) 0 18%, var(--red) 19% 68%, var(--red-dark) 100%);
+}
+
+button:hover {
+  transform: translate(1px, 1px);
+  box-shadow: var(--press);
+}
+
+button:active {
+  transform: translate(3px, 4px);
+  box-shadow: 0 0 0 var(--ink);
+}
+
+button:focus-visible {
+  outline: 3px solid var(--blue-dark);
+  outline-offset: 3px;
+}
+
+button:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+
+/* Counters use the same angled black layer as the title. */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 0;
+  overflow: hidden;
+  box-shadow: var(--lift);
+}
+
+.stats div {
+  min-width: 0;
+  padding: 7px 10px 10px;
+  text-align: center;
+}
+
+.stats div + div {
+  border-left: var(--line) solid var(--ink);
+}
+
+dt {
+  margin-bottom: 0;
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 400;
+  text-shadow:
+    -1px -1px 0 var(--white),
+    1px 1px 0 var(--white);
+  -webkit-text-stroke: 0.32px var(--ink);
+}
+
+dd {
+  position: relative;
+  isolation: isolate;
+  display: inline-block;
+  margin: 0;
+  color: var(--blue);
+  -webkit-text-fill-color: var(--blue);
+  font-family: var(--toon-font);
+  font-size: 46px;
+  font-weight: 400;
+  line-height: 0.82;
+  transform: scaleX(1.08);
+  -webkit-text-stroke: 1.25px var(--ink);
+  text-shadow: 1px 1px 0 var(--white);
+}
+
+dd[data-digits="3"] {
+  font-size: 38px;
+  transform: scaleX(1);
+}
+
+dd[data-digits="4"] {
+  font-size: 32px;
+  transform: scaleX(0.94);
+}
+
+.stats div:nth-child(2) dd {
+  color: var(--red);
+  -webkit-text-fill-color: var(--red);
+}
+
+dd::before {
+  content: attr(data-value);
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  transform: translate(3px, 4px);
+  color: var(--ink);
+  -webkit-text-fill-color: var(--ink);
+  -webkit-text-stroke: 1.8px var(--ink);
+  text-shadow: none;
+}
+
+.stats div:nth-child(2) dd::before {
+  color: var(--ink);
+  -webkit-text-fill-color: var(--ink);
+}
+
+dd::after {
+  content: none;
+}
+
+/* A small idle movement keeps the mascot alive without distracting from the task. */
+@keyframes mascot-idle {
+  0%,
+  100% {
+    transform: translate(4px, -2px) rotate(2deg) scale(1);
+  }
+
+  45% {
+    transform: translate(2px, -7px) rotate(-2deg) scale(1.04);
+  }
+
+  62% {
+    transform: translate(5px, -1px) rotate(3deg) scale(0.99);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mascot {
+    animation: none;
+  }
+}
