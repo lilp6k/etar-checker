@@ -1,5 +1,9 @@
 # E-TAR CHECKER
 
+<p align="center">
+  <img src="assets/checkbox.png" alt="E-TAR CHECKER mascot" width="220">
+</p>
+
 E-TAR CHECKER is a small Edge and Chrome extension for the Job Corps student portal.
 
 It checks enabled acknowledgement boxes on the E-TAR page. It does not save, submit, navigate, or click **Save Changes**. You still review the page and save it yourself.
@@ -84,42 +88,4 @@ That is normal for an unpacked extension. Turn on Developer mode on the extensio
 
 ## Privacy And Safety
 
-This extension is intentionally narrow.
-
-- It only runs when you click the popup button or use the keyboard shortcut.
-- It exits unless the active tab is `studentportal.jobcorps.org` and the page looks like E-TAR.
-- It only clicks boxes found under the **Acknowledge / Comment** column.
-- If it cannot find that column, it stops instead of guessing.
-- It asks for `activeTab` and `scripting`, not permanent access to every website.
-- It does not use cookies, browser storage, downloads, history, web requests, or remote servers.
-- It does not call `fetch`, `XMLHttpRequest`, `eval`, or `innerHTML`.
-- The popup counters stay inside the popup and are not saved.
-
-Chrome's `activeTab` permission gives an extension temporary access only after a user gesture, such as clicking the extension action or using a keyboard shortcut. The `scripting` permission is what lets the extension run its checker on that active tab.
-
-## Remaining Risk
-
-No browser extension is risk-free.
-
-- The portal can change its table markup. If that happens, the extension may stop finding the right boxes.
-- The extension clicks acknowledgement controls. Always review the page before saving.
-- The bundled Toony font is part of the design and remains in the repo. It keeps its own font metadata. Confirm you are allowed to share that font publicly before publishing this repository.
-
-## For Maintainers
-
-- `manifest.json` declares the extension name, popup, icons, shortcut, and permissions.
-- `content.js` finds the E-TAR acknowledgement column and clicks enabled controls.
-- `shared.js` injects the checker into the active tab.
-- `popup.js` runs the checker and updates the status and counters.
-- `popup.css` controls the red, blue, black-outline cartoon style.
-- `background.js` supports the `Alt+Shift+C` shortcut.
-
-Before sharing a new version, run:
-
-```powershell
-Get-Content .\manifest.json | ConvertFrom-Json | Out-Null
-node --check .\content.js
-node --check .\shared.js
-node --check .\popup.js
-node --check .\background.js
-```
+The extension only runs when you click it or use its keyboard shortcut. It is built for the E-TAR page and does not save, store, or send your portal information anywhere.
